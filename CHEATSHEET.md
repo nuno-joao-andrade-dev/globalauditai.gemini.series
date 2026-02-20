@@ -1,6 +1,6 @@
 ## 📄 CHEATSHEET.md: Prompting for Success
 
-When using **Gemini 3 Pro** via the `gemini-cli` or within your application logic, the quality of your output depends on the "Vibe" and "Context" you provide.
+When using **Gemini 3.1 Pro** via the `gemini-cli` or within your application logic, the quality of your output depends on the "Vibe" and "Context" you provide.
 
 ### 1. The "Think-First" Debugging Prompt
 
