@@ -47,6 +47,7 @@ gcloud services enable aiplatform.googleapis.com run.googleapis.com artifactregi
 # Then, export it in your shell:
 export GOOGLE_API_KEY="your_new_api_key"
 export GOOGLE_GENAI_USE_VERTEXAI="true"
+export GOOGLE_CLOUD_LOCATION=global
 
 # if you aren't in the cloud shell
 export GOOGLE_CLOUD_PROJECT="..."
@@ -63,6 +64,15 @@ export GOOGLE_CLOUD_PROJECT="..."
 ```bash
 git clone https://github.com/nuno-joao-andrade-dev/globalauditai.gemini.series
 cd globalauditai.gemini.series
+
+
+# Create local env file
+echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" > .env
+echo "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT" >> .env
+echo "GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION" >> .env
+
+
+gcloud auth application-default login
 
 # Install the Gemini CLI tool
 npm install -g @google/gemini-cli
@@ -94,7 +104,7 @@ Or just ask Gemini to follow all the instructions:
 
 ```bash
 Gemini prompt:
-follow all the instructions in all *.md files
+follow all the instructions in all *.md files except the deploy step
 ```
 
 #### 3. Local Development (with Hot Reload)
@@ -102,10 +112,6 @@ follow all the instructions in all *.md files
 The generated `package.json` includes **Nodemon** and uses the native Node 20 `--env-file` flag.
 
 ```bash
-# Create local env file
-echo "GOOGLE_API_KEY=$GOOGLE_CLOUD_API" > .env
-echo "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT" >> .env
-echo "GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION" >> .env
 
 npm install
 npm run dev

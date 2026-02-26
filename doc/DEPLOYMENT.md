@@ -24,5 +24,5 @@ The application intentionally avoids `.env` files (like `dotenv`) to strictly re
 In production (Cloud Run), environment variables must be injected via the platform configuration.
 
 Required Environment Variables:
-*   `GOOGLE_CLOUD_API_KEY`: The API key generated from Google Cloud / Vertex AI required to authenticate the `@google/genai` SDK.
+*   `GOOGLE_API_KEY`: The API key generated from Google Cloud / Vertex AI required to authenticate the `@google/genai` SDK.
 *   `GOOGLE_CLOUD_PROJECT`: Required natively by Google Cloud SDKs to identify the host project.

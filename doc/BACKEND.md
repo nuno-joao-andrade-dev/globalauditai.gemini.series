@@ -6,7 +6,7 @@ The backend is a lightweight Node.js Express server acting as a secure proxy bet
 
 *   `express`: The web server framework.
 *   `multer`: Middleware for handling `multipart/form-data` (file uploads).
-*   `@google/genai`: The official Google AI SDK for interacting with Gemini models.
+*   `@google/genai`: The official the latest version of Google AI SDK for interacting with Gemini models.
 *   `fs` & `path`: Native Node modules for file system operations.
 
 ## Endpoint: `POST /audit`
@@ -18,7 +18,7 @@ The endpoint uses `multer` configured with a `diskStorage` engine. The destinati
 *   *Security Note:* Using `/tmp` ensures compatibility with serverless environments like Google Cloud Run, where the filesystem is memory-backed and ephemeral.
 
 ### Integration with Gemini (`@google/genai`)
-The `@google/genai` SDK is initialized using the `process.env.GOOGLE_CLOUD_API_KEY`. It calls the `gemini-3.1-pro-preview` model.
+The `@google/genai` latest version SDK is initialized using the `process.env.GOOGLE_API_KEY` and vertexai set to true . It calls the `gemini-3.1-pro-preview` model.
 
 **The System Prompt:**
 The prompt is carefully engineered to handle multimodal extraction and compliance validation in a single pass:

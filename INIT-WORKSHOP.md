@@ -13,7 +13,7 @@ Ensure the following directories exist:
 **Prompt:**
 Act as a Senior Backend Architect. Write a Node.js Express server (`index.js`).
 * **AI Model:** Initialize `gemini-3.1-pro-preview` using the `@google/genai` SDK.
-* **SDK Configuration:** Initialize `GoogleGenAI` with `apiKey: process.env.GOOGLE_CLOUD_API_KEY`.
+* **SDK Configuration:** Initialize `GoogleGenAI` with `apiKey: process.env.GOOGLE_API_KEY`.
 * **Storage Rules:** Use `multer` diskStorage pointed exclusively to `/tmp/uploads`.
 * **Cleanup Policy:** You MUST implement an `fs.unlinkSync(path)` call within a `finally` block to delete every uploaded file immediately after model inference.
 * **Environment:** Do NOT use `dotenv` or load `.env` files. Rely exclusively on system environment variables.

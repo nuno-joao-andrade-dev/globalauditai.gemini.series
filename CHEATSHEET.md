@@ -39,4 +39,9 @@ When auditing documents, the "System Instruction" is your policy manual.
 > 
 > 
 
+# Check if billing is enabled, must return true
+
+ gcloud billing projects describe $GOOGLE_CLOUD_PROJECT
+
+ 
 ---

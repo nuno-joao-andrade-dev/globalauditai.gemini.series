@@ -14,12 +14,12 @@ The `INIT-WORKSHOP.md` file is the **orchestrator** of this agentic workflow. Wh
 
 ### 🏗️ 1. Backend: Secure Auditor Logic
 
-**Constraint:** All file handling must be stateless. Use `@google/genai` for enterprise-grade access.
+**Constraint:** All file handling must be stateless. Use `@google/genai` latest version, for enterprise-grade access.
 
 > **System Prompt:**
 > "Act as a Senior Backend Architect. Write a Node.js Express server (`index.js`).
-> * **AI Model:** Initialize `gemini-3.1-pro-preview` using the `@google/genai` SDK.
-> * **SDK Configuration:** Initialize `GoogleGenAI` with `apiKey: process.env.GOOGLE_CLOUD_API_KEY`.
+> * **AI Model:** Initialize `gemini-3.1-pro-preview` using the `@google/genai` make sure is the latest version SDK.
+> * **SDK Configuration:** Initialize `GoogleGenAI` with vertexai configs, use @google/genai package with this constructor: new GoogleGenAI({vertexai: true, apiKey:process.env.GOOGLE_API_KEY});
 > * **Storage Rules:** Use `multer` diskStorage pointed exclusively to `/tmp/uploads`.
 > * **Cleanup Policy:** You MUST implement an `fs.unlinkSync(path)` call within a `finally` block to delete every uploaded file immediately after model inference.
 > * **Response Format:** Extract `Vendor`, `Date`, `Amount`, and `TaxID`. Treat 'Tax ID', 'VAT ID', 'VAT No', 'VAT', and 'TIN' as the exact same thing for compliance validation. Note that these IDs are often alphanumeric. Scan the entire document carefully for any alphanumeric string associated with these labels. IMPORTANT: The extracted TaxID MUST be an actual reference number (e.g., 'GB123456789', '12-3456789'). If the text found is a placeholder like 'Insert your VAT ID', '[Your Tax ID]', or similar instructional text, treat it as missing. Always output the valid found value under the 'TaxID' key. Set `ComplianceRisk` to true if a valid `TaxID` is missing or empty. Flag `ManualReview` as true if `Amount > 5000` OR if `ComplianceRisk` is true. Return ONLY valid JSON."
@@ -81,7 +81,7 @@ The application must rely exclusively on system environment variables for config
 > 3. **invoice_ok_3.png:** A simple software subscription invoice from 'SaaS Inc' for '$99.99' with a visible alphanumeric VAT ID.
 > 
 > **NOT OK Invoices:**
-> 4. **invoice_not_ok_1.png:** A high-value invoice from 'Azure Cloud Services' for '$12,400.50', clearly showing a Tax ID number (This should trigger the 'Manual Review' flag based on amount only).
+> 4. **invoice_not_ok_1.png:** A high-value invoice from 'Acme Cloud Services' for '$12,400.50', clearly showing a Tax ID number (This should trigger the 'Manual Review' flag based on amount only).
 > 5. **invoice_not_ok_2.png:** A messy, handwritten-style receipt from a local vendor that intentionally leaves out the 'Tax ID' field (This should trigger the 'Compliance Risk' flag).
 > 6. **invoice_not_ok_3.png:** A handwritten invoice from a contractor for '$450.00' with no TIN or Tax ID visible anywhere (This should trigger the 'Compliance Risk' flag).
 > 
