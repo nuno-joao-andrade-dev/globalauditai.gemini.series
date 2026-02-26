@@ -59,11 +59,15 @@ This workshop relies on generating sample invoices dynamically using Gemini. Thi
 
 *   **Installation:** After installing the `gemini-cli`, add the `nanobanana` tool. The `-y` flag auto-approves the `npx` execution.
     ```bash
-    gemini mcp add nanobanana npx -y @google/gemini-nanobanana-mcp
+    gemini extensions install https://github.com/gemini-cli-extensions/nanobanana
     ```
 *   **Verification:** You can list your active MCP connections to verify it was added:
     ```bash
     gemini mcp list
+    ```
+*   **Troubleshooting:** If there is an error in the MCP list, execute the following script (replace `[username]` with your actual user):
+    ```bash
+    /home/[username]/.gemini/extensions/vertex/run.sh
     ```
 
 ### 6. Code Editor

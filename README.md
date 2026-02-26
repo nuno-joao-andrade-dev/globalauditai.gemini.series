@@ -24,7 +24,7 @@ Participants must prepare their Google Cloud environment before running the AI o
 Open your [Google Cloud Shell](https://www.google.com/search?q=https://console.cloud.google.com) and execute:
 
 ```bash
-# 1. Create a unique project
+# 1. Create a unique project 
 export MY_PROJECT_ID="global-audit-$(date +%s)"
 gcloud projects create $MY_PROJECT_ID --name="GlobalAudit AI Workshop"
 gcloud config set project $MY_PROJECT_ID
@@ -43,10 +43,15 @@ gcloud billing projects link $MY_PROJECT_ID --billing-account=$MY_BILLING_ID
 gcloud services enable aiplatform.googleapis.com run.googleapis.com artifactregistry.googleapis.com
 
 # Create a Vertex AI API Key
-# Navigate to: APIs & Services > Credentials > Create Credentials > API Key
+# Navigate to: Vertex AI Studio > API Keys > Create API Key
 # Then, export it in your shell:
 export GOOGLE_API_KEY="your_new_api_key"
+export GOOGLE_GENAI_USE_VERTEXAI="true"
 
+# if you aren't in the cloud shell
+export GOOGLE_CLOUD_PROJECT="..."
+
+# BEFORE CONTINUE PLACE THIS KEYS IN YOUR ~/.bashrc
 ```
 
 ---
@@ -63,15 +68,33 @@ cd globalauditai.gemini.series
 npm install -g @google/gemini-cli
 
 # Enable the required MCP tools (like nanobanana for image generation)
-gemini mcp add nanobanana npx -y @google/gemini-nanobanana-mcp
+gemini extensions install https://github.com/gemini-cli-extensions/nanobanana
+
+gemini --model gemini-3.1-pro-preview
+
+# check that auth and make sure you are using vertexai auth
+# Gemini prompt:
+/auth
+
+# Choose vertex ai auth
+
 ```
+
+
 
 #### 2. Run the AI Orchestrator
 
 Open the `INIT-WORKSHOP.md` file and follow the step-by-step instructions to generate your source code using Gemini 3 Pro.
 
 ```bash
-code INIT-WORKSHOP.md
+cat INIT-WORKSHOP.md
+```
+
+Or just ask Gemini to follow all the instructions:
+
+```bash
+Gemini prompt:
+follow all the instructions in all *.md files
 ```
 
 #### 3. Local Development (with Hot Reload)
@@ -80,8 +103,9 @@ The generated `package.json` includes **Nodemon** and uses the native Node 20 `-
 
 ```bash
 # Create local env file
-echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" > .env
-echo "GOOGLE_CLOUD_PROJECT=$MY_PROJECT_ID" >> .env
+echo "GOOGLE_API_KEY=$GOOGLE_CLOUD_API" > .env
+echo "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT" >> .env
+echo "GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION" >> .env
 
 npm install
 npm run dev
